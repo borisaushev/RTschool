@@ -4,14 +4,28 @@
 #include "..\input\input.h"
 #include "calculations.h"
 
+/**
+ * @param value
+ * @return if the value is zero
+ */
 int isZero(double value) {
     return fabs(value) < FLT_EPSILON;
 }
 
+/**
+ * @param value
+ * @return if the value is lewss then zero
+ */
 int lessThenZero(double value) {
     return value + FLT_EPSILON < 0;
 }
 
+
+/**
+ * solves equation and writes roots values in parameter
+ * @param equationData pointer to the data struct object to write roots in
+ * @return 0 if all fine
+ */
 int solveEquation(equationData_t *equationData) {
     if (isZero(equationData->inputData.a)) {
         // a == 0, equation is linear or doesn't depend on X
@@ -25,6 +39,12 @@ int solveEquation(equationData_t *equationData) {
     return 0;
 }
 
+/**
+ * solves square equation and writes roots in param pointer,
+ * only called if a-koof is non-zero
+ * @param equationData pointer to the data struct object to write roots in
+ * @return zero if all fine
+ */
 int solveSquareEquation(equationData_t *equationData) {
     double a = equationData->inputData.a;
     double b = equationData->inputData.b;
@@ -57,6 +77,12 @@ int solveSquareEquation(equationData_t *equationData) {
     return 0;
 }
 
+/**
+ * solves linear equation and writes roots in param pointer,
+ * only called if a-koof is zero
+ * @param equationData pointer to the data struct object to write roots in
+ * @return zero if all fine
+ */
 int solveLinearEquation(equationData_t *equationData) {
     double b = equationData->inputData.b;
     double c = equationData->inputData.c;

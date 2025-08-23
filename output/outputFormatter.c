@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include "..\calculations\calculations.h"
 
+/**
+ * Prints the answer
+ * @param equationData all info about equation and ints solutions
+ * @return zero if all fine
+ */
 int printSolution(equationData_t equationData) {
     switch (equationData.solutionsCount) {
         case ZERO:

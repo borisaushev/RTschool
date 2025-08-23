@@ -11,7 +11,7 @@ typedef enum solutionsCount {
 
 typedef struct equationData {
     equationInput_t inputData;
-    double solutions[2];
+    double solutions[MAX_SOLUTIONS];
     solutionsCount_t solutionsCount;
 } equationData_t;
 

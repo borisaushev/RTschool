@@ -1,51 +1,55 @@
 #include "input.h"
 #include <stdio.h>
+#include <string.h>
 
-int getLine(char(*line)[MAX_LINE_LENGTH]) {
-    char inputChar = 0;
-    //Reading next char until new line or EOF or limit of symbols reached
-    for (int i = 0; i < MAX_LINE_LENGTH; i++) {
-        scanf("%c", &inputChar);
-        (*line)[i] = inputChar;
-
-        //If we get new line or EOF - just stop
-        if (inputChar == '\n' || inputChar == EOF_CONST || inputChar == EOF) {
-            return i+1;
-        }
+/**
+ *
+ * @param line user input
+ * @param assignedValuesCount assigned values count
+ * @return
+ * - STOPPED if user stops program manualy
+ * - INVALID_INPUT if user inputs wrong values
+ * - LAST_LINE if user inputs correct values ended with EOF
+ */
+inputStatus_t getStatusCode(char line[MAX_LINE_LENGTH], int assignedValuesCount) {
+    if (assignedValuesCount == EOF) {
+        return STOPPED;
     }
-    //we didnt get new line or EOF and reached limit
-    return MAX_LINE_LENGTH+1;
+    if (assignedValuesCount != NUMBER_OF_COEFFICIENTS) {
+        return INVALID_INPUT;
+    }
+    if (line[strlen(line) - 1] == EOF_CONST) {
+        return LAST_LINE;
+    }
+
+    return SUCCESS;
 }
 
+/**
+ * gets line from input stream and parses koof values
+ * @param coefficients pointer to struct object to write koffs into
+ * @return input status depending on user input:
+ *  - STOPPED if user stops the program manualy
+ *  - INVALID_INPUT if user inputs too big line
+ *  - getStatusCode() value otherwise
+ *
+ */
 inputStatus_t getCoefficients(equationInput_t *coefficients) {
     printf("Enter a, b, c coefficients separated by space: \n");
     char line[MAX_LINE_LENGTH];
 
-    int length = getLine(&line);
-    if (length > MAX_LINE_LENGTH) {
-        return INVALID_INPUT;
-    }
-    if (line[0] == EOF_CONST) {
-        return STOPPED;
+    if (fgets(line, MAX_LINE_LENGTH-1, stdin) == NULL) {
+        if (feof(stdin)) {
+            return STOPPED;
+        }
+        else if (strlen(line) > MAX_LINE_LENGTH) {
+            return INVALID_INPUT;
+        }
     }
 
     //it's a line, trying to parse it
     int assignedValuesCount = sscanf(line, "%lg %lg %lg",
         &coefficients->a, &coefficients->b, &coefficients->c);
 
-    if (assignedValuesCount == EOF_CONST || assignedValuesCount == EOF) {
-        return STOPPED;
-    }
-
-    //validating parsed values
-    if (assignedValuesCount != NUMBER_OF_COEFFICIENTS) {
-        return INVALID_INPUT;
-    }
-
-    //reached last line of values
-    if (line[length-1] == EOF_CONST) {
-        return LAST_LINE;
-    }
-    return SUCCESS;
+    return getStatusCode(line, assignedValuesCount);
 }
-
