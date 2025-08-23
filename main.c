@@ -7,11 +7,23 @@
 #include "tests/tests.h"
 
 int solveEquationsUntilStop();
+int solveFromConsoleInput();
 
-int main() {
+int main(int argc, char *argv[]) {
     runTests();
     printf("Tests run successfully!\n\n");
 
+    if (argc == 1 && *argv[0] == 'F') {
+
+    }
+    else {
+        solveFromConsoleInput();
+    }
+
+    return 0;
+}
+
+int solveFromConsoleInput() {
     printf("Quadratic equation solver\n");
     printf("Ctrl+Z+Enter to stop\n\n");
 

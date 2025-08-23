@@ -11,43 +11,52 @@ int runTests() {
 }
 
 int solveEquationTest() {
-    equationInput_t data1 = {1, 0, -1};
-    equationInput_t data2= {1, 2, 1};
-    equationInput_t data3 = {1, 0, 1};
+    equationData_t data1 = { {1, 0, -1}, {1,-1}, TWO};
+    equationData_t data2 = { {1, 2, 1}, {-1,0}, ONE};
+    equationData_t data3 = { {1, 0, 1}, {0,0}, ZERO};
+    equationData_t data4 = { {0, 0, 0}, {0,0}, INF};
 
-    assertTwoRoots(data1, 1, -1);
-    assertOneRoot(data2, -1);
-    assertNoRoots(data3);
-
-    return 0;
-}
-
-int assertTwoRoots(equationInput_t input, double expSol1, double expSol2) {
-    equationData_t equationData = {input};
-    solveEquation(&equationData);
-
-    assert(equationData.solutionsCount == TWO);
-    assert(equationData.solutions[0] == expSol1);
-    assert(equationData.solutions[1] == expSol2);
+    assertSolutionEquals(data1);
+    assertSolutionEquals(data2);
+    assertSolutionEquals(data3);
+    assertSolutionEquals(data4);
 
     return 0;
 }
 
-int assertOneRoot(equationInput_t input, double expSol) {
-    equationData_t equationData = {input};
+int assertSolutionEquals(equationData_t expectedSolution) {
+    equationData_t equationData = {expectedSolution.inputData};
     solveEquation(&equationData);
 
-    assert(equationData.solutionsCount == ONE);
-    assert(equationData.solutions[0] == expSol);
+    assertDataEquals(expectedSolution, equationData);
 
     return 0;
 }
 
-int assertNoRoots(equationInput_t input) {
-    equationData_t equationData = {input};
-    solveEquation(&equationData);
+int assertDataEquals(equationData_t expectedSolution, equationData_t equationData) {
+    assert(expectedSolution.solutionsCount == equationData.solutionsCount);
 
-    assert(equationData.solutionsCount == ZERO);
+    assert(expectedSolution.inputData.a == equationData.inputData.a);
+    assert(expectedSolution.inputData.b == equationData.inputData.b);
+    assert(expectedSolution.inputData.c == equationData.inputData.c);
+
+    switch (expectedSolution.solutionsCount) {
+        case ZERO: {
+            return 0;
+        }
+        case INF: {
+            return 0;
+        }
+        case ONE: {
+            assert(expectedSolution.solutions[0] == equationData.solutions[0]);
+            return 0;
+        }
+        case TWO: {
+            assert(expectedSolution.solutions[0] == equationData.solutions[0]);
+            assert(expectedSolution.solutions[1] == equationData.solutions[1]);
+            return 0;
+        }
+    }
 
     return 0;
 }

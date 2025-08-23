@@ -5,10 +5,8 @@ int runTests();
 
 int solveEquationTest();
 
-int assertTwoRoots(equationInput_t input, double expSol1, double expSol2);
+int assertSolutionEquals(equationData_t expectedSolution);
 
-int assertOneRoot(equationInput_t input, double expSol);
-
-int assertNoRoots(equationInput_t input);
+int assertDataEquals(equationData_t expectedSolution, equationData_t equationData);
 
 #endif //SIMPLE_EXAMPLE_TESTS_H
