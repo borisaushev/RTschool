@@ -67,10 +67,7 @@ int solveEquationTestWithFileData() {
     FILE* fileStream = fopen(TEST_DATA_FILE_PATH, "r");
 
     // Check if the file was opened successfully
-    if (fileStream == NULL) {
-        printf("Error opening file while testing");
-        return 1;
-    }
+    assert(fileStream != NULL);
 
     char inputLine[MAX_LINE_LENGTH];
     double a = 0, b = 0, c = 0;
@@ -112,7 +109,7 @@ solutionsCount_t getSolutionsCount(int solutionsCount) {
         case -1:
             return INF;
         default:
-            printf("unexpected solutions count");
+            printf("unexpected solutions count in file test data");
             assert(1 == 0);
     }
 }
