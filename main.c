@@ -1,9 +1,5 @@
 #include <stdio.h>
-//fgets
-//сделать доку
 //добавить чтение из файла (можно через main)
-//юнит тесты
-#include <assert.h>
 
 #include "input/input.h"
 #include "calculations/calculations.h"
