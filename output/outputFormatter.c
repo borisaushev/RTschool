@@ -1,25 +1,31 @@
 #include <stdio.h>
 #include "..\calculations\calculations.h"
+#include "outputFormatter.h"
 
 /**
  * Prints the answer
  * @param equationData all info about equation and ints solutions
+ * @param inputType input type
  * @return zero if all fine
  */
 int printSolution(equationData_t equationData) {
+    double a = equationData.inputData.a, b = equationData.inputData.b, c = equationData.inputData.c;
+
+    printf("Equation %g*x^2 %g*x %g ", a, b, c);
+
     switch (equationData.solutionsCount) {
         case ZERO:
-            printf("Equation has no solutions\n");
+            printf("has no solutions\n");
             break;
         case ONE:
-            printf("Equation has 1 solutions: %g\n", equationData.solutions[0]);
+            printf("has 1 solutions: %g\n", equationData.solutions[0]);
             break;
         case TWO:
-            printf("Equation has 2 solutions: %g, %g\n",
-                equationData.solutions[0], equationData.solutions[1]);
+            printf("has 2 solutions: %g, %g\n",
+                   equationData.solutions[0], equationData.solutions[1]);
             break;
         case INF:
-            printf("Equation has infinitely many solutions\n");
+            printf("has infinitely many solutions\n");
             break;
     }
     printf("\n");

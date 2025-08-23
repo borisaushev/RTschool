@@ -34,12 +34,15 @@ inputStatus_t getStatusCode(char line[MAX_LINE_LENGTH], int assignedValuesCount)
  *  - getStatusCode() value otherwise
  *
  */
-inputStatus_t getCoefficients(equationInput_t *coefficients) {
-    printf("Enter a, b, c coefficients separated by space: \n");
+inputStatus_t getCoefficients(equationInput_t *coefficients, FILE* stream) {
+    if (stream == stdin) {
+        printf("Enter a, b, c coefficients separated by space: \n");
+    }
+
     char line[MAX_LINE_LENGTH];
 
-    if (fgets(line, MAX_LINE_LENGTH-1, stdin) == NULL) {
-        if (feof(stdin)) {
+    if (fgets(line, MAX_LINE_LENGTH-1, stream) == NULL) {
+        if (feof(stream)) {
             return STOPPED;
         }
         else if (strlen(line) > MAX_LINE_LENGTH) {

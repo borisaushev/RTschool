@@ -14,7 +14,7 @@ int isZero(double value) {
 
 /**
  * @param value
- * @return if the value is lewss then zero
+ * @return if the value is less then zero
  */
 int lessThenZero(double value) {
     return value + FLT_EPSILON < 0;
