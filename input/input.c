@@ -9,7 +9,7 @@ int getLine(char(*line)[MAX_LINE_LENGTH]) {
         (*line)[i] = inputChar;
 
         //If we get new line or EOF - just stop
-        if (inputChar == '\n' || inputChar == EOF) {
+        if (inputChar == '\n' || inputChar == EOF_CONST || inputChar == EOF) {
             return i+1;
         }
     }
@@ -19,33 +19,33 @@ int getLine(char(*line)[MAX_LINE_LENGTH]) {
 
 inputStatus_t getCoefficients(equationInput_t *coefficients) {
     printf("Enter a, b, c coefficients separated by space: \n");
-    double a = 0, b = 0, c = 0;
-
     char line[MAX_LINE_LENGTH];
-    int length = getLine(&line);
 
+    int length = getLine(&line);
     if (length > MAX_LINE_LENGTH) {
         return INVALID_INPUT;
     }
+    if (line[0] == EOF_CONST) {
+        return STOPPED;
+    }
 
     //it's a line, trying to parse it
-    int assignedValuesCount = sscanf(line, "%lg %lg %lg", &a, &b, &c);
+    int assignedValuesCount = sscanf(line, "%lg %lg %lg",
+        &coefficients->a, &coefficients->b, &coefficients->c);
+
+    if (assignedValuesCount == EOF_CONST || assignedValuesCount == EOF) {
+        return STOPPED;
+    }
 
     //validating parsed values
     if (assignedValuesCount != NUMBER_OF_COEFFICIENTS) {
         return INVALID_INPUT;
     }
 
-    coefficients->a = a;
-    coefficients->b = b;
-    coefficients->c = c;
-
     //reached last line of values
-    if (line[length-1] == EOF) {
-        printf("hee");
+    if (line[length-1] == EOF_CONST) {
         return LAST_LINE;
     }
-
     return SUCCESS;
 }
 
