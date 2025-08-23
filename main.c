@@ -3,15 +3,21 @@
 //сделать доку
 //добавить чтение из файла (можно через main)
 //юнит тесты
+#include <assert.h>
+
 #include "input/input.h"
 #include "calculations/calculations.h"
 #include "output/outputFormatter.h"
+#include "tests/tests.h"
 
 int solveEquationsUntilStop();
 
 int main() {
+    runTests();
+    printf("Tests run successfully!\n\n");
+
     printf("Quadratic equation solver\n");
-    printf("Ctrl+D+Enter to stop\n\n");
+    printf("Ctrl+Z+Enter to stop\n\n");
 
     solveEquationsUntilStop();
 
