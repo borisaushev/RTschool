@@ -5,7 +5,6 @@
 /**
  * Prints the answer
  * @param equationData all info about equation and ints solutions
- * @param inputType input type
  * @return zero if all fine
  */
 int printSolution(equationData_t equationData) {

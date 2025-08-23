@@ -1,8 +1,6 @@
 #include <stdio.h>
 //добавить чтение из файла (можно через main)
 
-#include <stdlib.h>
-
 #include "input/input.h"
 #include "calculations/calculations.h"
 #include "output/outputFormatter.h"
@@ -20,7 +18,6 @@ int main(int argc, char* argv[]) {
 
     if (argc == 2) {
         char* filePath = argv[1];
-        printf("\narg: %s\n", filePath);
         solveFromFile(filePath);
     }
     else {
