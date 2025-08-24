@@ -38,7 +38,7 @@ inputStatus_t getStatusCode(char line[MAX_LINE_LENGTH], int assignedValuesCount)
  */
 inputStatus_t getCoefficients(equationInput_t *coefficients, FILE* stream) {
     if (stream == stdin) {
-        printColored("Enter a, b, c coefficients separated by space: \n", CYAN);
+        printColored(CYAN, "Enter a, b, c coefficients separated by space: \n");
     }
 
     char line[MAX_LINE_LENGTH];

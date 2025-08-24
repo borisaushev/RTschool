@@ -34,11 +34,11 @@ int solveFromFile(char* file) {
 
     // Check if the file was opened successfully
     if (fileStream == NULL) {
-        printColored("Error opening file", RED);
+        printColored(RED, "Error opening file");
         return 1;
     }
 
-    printColored("Quadratic equation solver from file\n", GREEN);
+    printColored(GREEN, "Quadratic equation solver from file\n");
     solveEquationsUntilStop(fileStream);
 
     return 0;
@@ -49,9 +49,9 @@ int solveFromFile(char* file) {
  * @return zero if all fine
  */
 int solveFromConsoleInput() {
-    printColored("Quadratic equation solver\n", GREEN);
-    printColored("Add file path as argument to solve equations from a file\n", WHITE);
-    printColored("Ctrl+Z+Enter to stop\n\n", WHITE);
+    printColored(GREEN, "Quadratic equation solver\n");
+    printColored(WHITE, "Add file path as argument to solve equations from a file\n");
+    printColored(WHITE, "Ctrl+Z+Enter to stop\n\n");
 
     solveEquationsUntilStop(stdin);
 
@@ -77,15 +77,15 @@ inputStatus_t solveEquationsUntilStop(FILE* stream) {
             printSolution(equationData);
             return STOPPED;
         case INVALID_INPUT:
-            printf("invalid input");
+            printColored(RED, "invalid input");
             return INVALID_INPUT;
         case STOPPED:
-            printf("program stopped");
+            printColored(WHITE, "program stopped");
             return STOPPED;
         case SUCCESS:
             return SUCCESS;
         default:
-            printf("invalid program status");
+            printColored(RED, "invalid program status");
             assert(0);
             return INVALID_INPUT;
     }

@@ -18,20 +18,20 @@ int printSolution(equationData_t equationData) {
 
     switch (equationData.solutionsCount) {
         case ZERO:
-            printColored("has no solutions\n", RED);
+            printColored(RED, "has no solutions\n");
             break;
         case ONE:
-            printColored("has 1 solutions: %g\n", YELLOW, equationData.solutions[0]);
+            printColored(YELLOW, "has 1 solutions: %g\n", equationData.solutions[0]);
             break;
         case TWO:
-            printColored("has 2 solutions: %g, %g\n", GREEN,
+            printColored(GREEN, "has 2 solutions: %g, %g\n",
                    equationData.solutions[0], equationData.solutions[1]);
             break;
         case INF:
-            printColored("has infinitely many solutions\n", WHITE);
+            printColored(WHITE, "has infinitely many solutions\n");
             break;
         default:
-            printColored("invalid solutions count\n", RED);
+            printColored(RED, "invalid solutions count\n");
             assert(0);
     }
     printf("\n");
@@ -41,19 +41,19 @@ int printSolution(equationData_t equationData) {
 
 /**
  * prints custom color text with formatted string
- * @param format printf-like format
  * @param textColor text color
+ * @param format printf-like format
  * @param ... print-like parameters
  * @return zero if all fine
  */
-int printColored(const char format[], textColor_t textColor, ...) {
+int printColored(textColor_t textColor, const char format[],  ...) {
     assert(strlen(format) <= MAX_LINE_LENGTH);
 
     char result[MAX_LINE_LENGTH];
     result[0] = '\0';
 
     va_list args;
-    va_start(args, textColor);
+    va_start(args, format);
     vsprintf(result, format, args);
     va_end(args);
 

@@ -11,7 +11,7 @@ typedef enum textColor {
 
 int printSolution(equationData_t equationData);
 
-int printColored(const char format[], textColor_t textColor, ...);
+int printColored(textColor_t textColor, const char format[],  ...);
 
 const char* getColorPrefix(textColor_t textColor);
 
