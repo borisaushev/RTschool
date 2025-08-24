@@ -9,6 +9,8 @@ int runTests() {
     solveEquationTest();
     solveEquationTestWithFileData();
 
+    printf("Tests run successfully!\n\n");
+
     return 0;
 }
 
