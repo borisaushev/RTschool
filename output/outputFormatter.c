@@ -39,6 +39,13 @@ int printSolution(equationData_t equationData) {
     return 0;
 }
 
+/**
+ * prints custom color text with formatted string
+ * @param format printf-like format
+ * @param textColor text color
+ * @param ... print-like parameters
+ * @return zero if all fine
+ */
 int printColored(const char format[], textColor_t textColor, ...) {
     assert(strlen(format) <= MAX_LINE_LENGTH);
 
@@ -55,6 +62,11 @@ int printColored(const char format[], textColor_t textColor, ...) {
     return 0;
 }
 
+/**
+ * return color prefix string for given text color
+ * @param textColor text color
+ * @return prefix for given color to use in printf
+ */
 const char* getColorPrefix(textColor_t textColor) {
     switch (textColor) {
         case BLACK:
