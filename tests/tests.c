@@ -6,7 +6,10 @@
 #include "../calculations/calculations.h"
 #include "tests.h"
 
-
+//!
+//! runs all tests
+//! @return zero if all fine
+//!
 int runTests() {
     solveEquationTest();
     solveEquationTestWithFileData();

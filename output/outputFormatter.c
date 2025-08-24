@@ -54,6 +54,7 @@ int printColored(textColor_t textColor, const char format[],  ...) {
     char result[MAX_LINE_LENGTH];
     result[0] = '\0';
 
+    //formatting string
     va_list args;
     va_start(args, format);
     vsprintf(result, format, args);

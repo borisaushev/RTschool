@@ -1,11 +1,10 @@
 //! @file
 
 #include "input.h"
+#include "../output/outputFormatter.h"
 
 #include <stdio.h>
 #include <string.h>
-
-#include "../output/outputFormatter.h"
 
 //!
 //! @param line user input

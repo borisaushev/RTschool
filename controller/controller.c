@@ -1,13 +1,12 @@
 //! @file
 
 #include "controller.h"
-
-#include <assert.h>
-#include <string.h>
-
 #include "../input/input.h"
 #include "../calculations/calculations.h"
 #include "../output/outputFormatter.h"
+
+#include <assert.h>
+#include <string.h>
 
 //!
 //!@param argc console arguments count

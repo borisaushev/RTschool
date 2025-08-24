@@ -32,7 +32,6 @@ int lessThenZero(double value) {
     return value + FLT_EPSILON < 0;
 }
 
-
 //! 
 //! solves equation and writes roots values in parameter
 //! @param equationData pointer to the data struct object to write roots in
