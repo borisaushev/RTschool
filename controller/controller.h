@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include "../input/input.h"
 
+const char* const FILE_FLAG = "-FILE";
+
 int startSolver(int argc, char **argv);
 
 inputStatus_t solveEquationsUntilStop(FILE* stream);

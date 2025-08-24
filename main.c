@@ -1,9 +1,12 @@
 #include "controller/controller.h"
-#include "output/outputFormatter.h"
 #include "tests/tests.h"
 
+
 int main(int argc, char* argv[]) {
-    runTests();
+
+    #ifdef TESTS_ENABLED
+        runTests();
+    #endif // TESTS_ENABLED
 
     startSolver(argc, argv);
 

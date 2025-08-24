@@ -1,3 +1,5 @@
+//! @file
+
 #include <assert.h>
 
 #include "../input/input.h"
@@ -28,6 +30,11 @@ int solveEquationTest() {
     return 0;
 }
 
+//!
+//! Solves equation with given data, and compares solution with given equation data
+//! @param expectedSolution expected equationData objects after equation solved
+//! @return zero if all fine
+//!
 int assertSolutionEquals(equationData_t expectedSolution) {
     equationData_t equationData = {expectedSolution.inputData};
     solveEquation(&equationData);
@@ -37,6 +44,13 @@ int assertSolutionEquals(equationData_t expectedSolution) {
     return 0;
 }
 
+
+//!
+//! fails if corresponding values in 2 given values differ
+//! @param expectedSolution first value
+//! @param equationData second value
+//! @return zero if all fine
+//!
 int assertDataEquals(equationData_t expectedSolution, equationData_t equationData) {
     assert(expectedSolution.solutionsCount == equationData.solutionsCount);
 
@@ -104,6 +118,11 @@ int solveEquationTestWithFileData() {
     return 0;
 }
 
+//!
+//! Returns solutionsCount integer equivalent
+//! @param solutionsCount solutionsCount value
+//! @return integer equivalent of it
+//!
 solutionsCount_t getSolutionsCount(int solutionsCount) {
     switch (solutionsCount) {
         case 0:

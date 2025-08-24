@@ -1,18 +1,20 @@
+//! @file
+
 #include "input.h"
+
 #include <stdio.h>
 #include <string.h>
 
 #include "../output/outputFormatter.h"
 
-/**
- *
- * @param line user input
- * @param assignedValuesCount assigned values count
- * @return
- * - STOPPED if user stops program manualy
- * - INVALID_INPUT if user inputs wrong values
- * - LAST_LINE if user inputs correct values ended with EOF
- */
+//!
+//! @param line user input
+//! @param assignedValuesCount assigned values count
+//! @return
+//!- STOPPED if user stops program manually
+//!- INVALID_INPUT if user inputs wrong values
+//!- LAST_LINE if user inputs correct values ended with EOF
+//!
 inputStatus_t getStatusCode(char line[MAX_LINE_LENGTH], int assignedValuesCount) {
     if (assignedValuesCount == EOF) {
         return STOPPED;
@@ -27,15 +29,14 @@ inputStatus_t getStatusCode(char line[MAX_LINE_LENGTH], int assignedValuesCount)
     return SUCCESS;
 }
 
-/**
- * gets line from input stream and parses koof values
- * @param coefficients pointer to struct object to write koffs into
- * @return input status depending on user input:
- *  - STOPPED if user stops the program manualy
- *  - INVALID_INPUT if user inputs too big line
- *  - getStatusCode() value otherwise
- *
- */
+//!
+//! gets line from input stream and parses koof values
+//! @param coefficients pointer to struct object to write koffs into
+//! @return input status depending on user input:
+//! - STOPPED if user stops the program manually
+//! - INVALID_INPUT if user inputs too big line
+//! - getStatusCode() value otherwise
+//!
 inputStatus_t getCoefficients(equationInput_t *coefficients, FILE* stream) {
     if (stream == stdin) {
         printColored(CYAN, "Enter a, b, c coefficients separated by space: \n");

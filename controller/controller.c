@@ -1,34 +1,38 @@
+//! @file
+
 #include "controller.h"
 
 #include <assert.h>
+#include <string.h>
 
 #include "../input/input.h"
 #include "../calculations/calculations.h"
 #include "../output/outputFormatter.h"
 
-/**
- *
- * @param argc console arguments count
- * @param argv console args
- * @return zero if all fine
- */
+//!
+//!@param argc console arguments count
+//!@param argv console args
+//!@return zero if all fine
+//!
 int startSolver(int argc, char **argv) {
-    if (argc == 2) {
-        char* filePath = argv[1];
-        solveFromFile(filePath);
+    for (int i = 1; i < argc - 1; ++i) {
+        if (!strcmp(argv[i], FILE_FLAG)) {
+            char* filePath = argv[i+1];
+            solveFromFile(filePath);
+            return 0;
+        }
     }
-    else {
-        solveFromConsoleInput();
-    }
+
+    solveFromConsoleInput();
 
     return 0;
 }
 
-/**
- * Solves equations from file, stored as 3 coof's per line separated by space
- * @param file file path as string
- * @return - zero if all fine - one if file didn't open
- */
+//!
+//! Solves equations from file, stored as 3 coof's per line separated by space
+//! @param file file path as string
+//! @return - zero if all fine - one if file didn't open
+//!
 int solveFromFile(char* file) {
     FILE* fileStream = fopen(file, "r");
 
@@ -44,10 +48,10 @@ int solveFromFile(char* file) {
     return 0;
 }
 
-/**
- * Gets console input and solves the equation itself untill user stops it
- * @return zero if all fine
- */
+//!
+//!Gets console input and solves the equation itself untill user stops it
+//!@return zero if all fine
+//!
 int solveFromConsoleInput() {
     printColored(GREEN, "Quadratic equation solver\n");
     printColored(WHITE, "Add file path as argument to solve equations from a file\n");
@@ -58,11 +62,10 @@ int solveFromConsoleInput() {
     return 0;
 }
 
-/**
- *
- * @param stream stream, from which the data is read
- * @return input status
- */
+//!
+//!@param stream stream, from which the data is read
+//!@return input status
+//!
 inputStatus_t solveEquationsUntilStop(FILE* stream) {
     equationData_t equationData;
     inputStatus_t programStatus = SUCCESS;
