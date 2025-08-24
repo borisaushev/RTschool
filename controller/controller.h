@@ -1,9 +1,11 @@
 #ifndef SIMPLE_EXAMPLE_CONTROLLER_H
 #define SIMPLE_EXAMPLE_CONTROLLER_H
+#include <stdio.h>
+#include "../input/input.h"
 
 int startSolver(int argc, char **argv);
 
-int solveEquationsUntilStop(FILE* stream);
+inputStatus_t solveEquationsUntilStop(FILE* stream);
 
 int solveFromConsoleInput();
 

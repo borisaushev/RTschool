@@ -1,6 +1,8 @@
 #ifndef SIMPLE_EXAMPLE_TESTS_H
 #define SIMPLE_EXAMPLE_TESTS_H
 
+#include "../calculations/calculations.h"
+
 const char* const TEST_DATA_FILE_PATH = "C:/Users/bossb/CLionProjects/untitled/tests/test_data.txt";
 
 int runTests();

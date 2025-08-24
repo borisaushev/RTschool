@@ -1,7 +1,7 @@
 #ifndef CALCULATIONS_H
 #define CALCULATIONS_H
 
-#include "..\input\input.h"
+#include "../input/input.h"
 
 const int MAX_SOLUTIONS = 2;
 
@@ -23,5 +23,9 @@ int solveSquareEquation(equationData_t *equationData);
 int solveLinearEquation(equationData_t *equationData);
 
 int lessThenZero(double value);
+
+int isZero(double value);
+
+int equals(double n1, double n2);
 
 #endif //CALCULATIONS_H

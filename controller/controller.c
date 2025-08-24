@@ -1,9 +1,17 @@
 #include "controller.h"
 
+#include <assert.h>
+
 #include "../input/input.h"
 #include "../calculations/calculations.h"
 #include "../output/outputFormatter.h"
 
+/**
+ *
+ * @param argc console arguments count
+ * @param argv console args
+ * @return zero if all fine
+ */
 int startSolver(int argc, char **argv) {
     if (argc == 2) {
         char* filePath = argv[1];
@@ -16,6 +24,11 @@ int startSolver(int argc, char **argv) {
     return 0;
 }
 
+/**
+ * Solves equations from file, stored as 3 coof's per line separated by space
+ * @param file file path as string
+ * @return - zero if all fine - one if file didn't open
+ */
 int solveFromFile(char* file) {
     FILE* fileStream = fopen(file, "r");
 
@@ -31,6 +44,10 @@ int solveFromFile(char* file) {
     return 0;
 }
 
+/**
+ * Gets console input and solves the equation itself untill user stops it
+ * @return zero if all fine
+ */
 int solveFromConsoleInput() {
     printf("Quadratic equation solver\n");
     printf("Add file path as argument to solve equations from a file\n");
@@ -41,7 +58,12 @@ int solveFromConsoleInput() {
     return 0;
 }
 
-int solveEquationsUntilStop(FILE* stream) {
+/**
+ *
+ * @param stream stream, from which the data is read
+ * @return input status
+ */
+inputStatus_t solveEquationsUntilStop(FILE* stream) {
     equationData_t equationData;
     inputStatus_t programStatus = SUCCESS;
     while ((programStatus = getCoefficients(&equationData.inputData, stream)) == SUCCESS) {
@@ -60,8 +82,11 @@ int solveEquationsUntilStop(FILE* stream) {
         case STOPPED:
             printf("program stopped");
             return STOPPED;
+        case SUCCESS:
+            return SUCCESS;
         default:
             printf("invalid program status");
-            return -1;
+            assert(0);
+            return INVALID_INPUT;
     }
 }

@@ -1,11 +1,11 @@
 #include <float.h>
 #include <math.h>
 
-#include "..\input\input.h"
+#include "../input/input.h"
 #include "calculations.h"
 
 /**
- * @param value
+ * @param value double value
  * @return if the value is zero
  */
 int isZero(double value) {
@@ -13,7 +13,17 @@ int isZero(double value) {
 }
 
 /**
- * @param value
+ * Compares 2 double values correctly
+ * @param n1 value 1
+ * @param n2 value 2
+ * @return if 2 values are equal
+ */
+int equals(double n1, double n2) {
+    return fabs(n1 - n2) < FLT_EPSILON;
+}
+
+/**
+ * @param value double value
  * @return if the value is less then zero
  */
 int lessThenZero(double value) {
@@ -86,7 +96,7 @@ int solveSquareEquation(equationData_t *equationData) {
 int solveLinearEquation(equationData_t *equationData) {
     double b = equationData->inputData.b;
     double c = equationData->inputData.c;
-    if (b != 0) {
+    if (!isZero(b)) {
         // equation is linear
         double x = -c / b;
         equationData->solutions[0] = x;
@@ -94,7 +104,7 @@ int solveLinearEquation(equationData_t *equationData) {
     }
     else {
         // equation doesn't depend on X
-        if (c == 0) {
+        if (isZero(c)) {
             // Infinite solutions
             equationData->solutionsCount = INF;
         } else {

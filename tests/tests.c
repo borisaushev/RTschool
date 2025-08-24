@@ -40,9 +40,9 @@ int assertSolutionEquals(equationData_t expectedSolution) {
 int assertDataEquals(equationData_t expectedSolution, equationData_t equationData) {
     assert(expectedSolution.solutionsCount == equationData.solutionsCount);
 
-    assert(expectedSolution.inputData.a == equationData.inputData.a);
-    assert(expectedSolution.inputData.b == equationData.inputData.b);
-    assert(expectedSolution.inputData.c == equationData.inputData.c);
+    assert(equals(expectedSolution.inputData.a, equationData.inputData.a));
+    assert(equals(expectedSolution.inputData.b, equationData.inputData.b));
+    assert(equals(expectedSolution.inputData.c, equationData.inputData.c));
 
     switch (expectedSolution.solutionsCount) {
         case ZERO: {
@@ -52,13 +52,17 @@ int assertDataEquals(equationData_t expectedSolution, equationData_t equationDat
             break;
         }
         case ONE: {
-            assert(expectedSolution.solutions[0] == equationData.solutions[0]);
+            assert(equals(expectedSolution.solutions[0], equationData.solutions[0]));
             break;
         }
         case TWO: {
-            assert(expectedSolution.solutions[0] == equationData.solutions[0]);
-            assert(expectedSolution.solutions[1] == equationData.solutions[1]);
+            assert(equals(expectedSolution.solutions[0], equationData.solutions[0]));
+            assert(equals(expectedSolution.solutions[1], equationData.solutions[1]));
             break;
+        }
+        default: {
+            printf("Wrong solutionsCount\n");
+            assert(0);
         }
     }
 
@@ -112,6 +116,6 @@ solutionsCount_t getSolutionsCount(int solutionsCount) {
             return INF;
         default:
             printf("unexpected solutions count in file test data");
-            assert(1 == 0);
+            assert(0);
     }
 }

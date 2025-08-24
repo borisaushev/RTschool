@@ -1,6 +1,8 @@
 #include <stdio.h>
-#include "..\calculations\calculations.h"
+#include "../calculations/calculations.h"
 #include "outputFormatter.h"
+
+#include <assert.h>
 
 /**
  * Prints the answer
@@ -26,6 +28,9 @@ int printSolution(equationData_t equationData) {
         case INF:
             printf("has infinitely many solutions\n");
             break;
+        default:
+            printf("invalid solutions count\n");
+            assert(1 == 0);
     }
     printf("\n");
 
