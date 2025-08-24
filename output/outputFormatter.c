@@ -3,6 +3,7 @@
 #include "outputFormatter.h"
 
 #include <assert.h>
+#include <stdarg.h>
 #include <string.h>
 
 /**
@@ -17,20 +18,20 @@ int printSolution(equationData_t equationData) {
 
     switch (equationData.solutionsCount) {
         case ZERO:
-            printf("has no solutions\n");
+            printColored("has no solutions\n", RED);
             break;
         case ONE:
-            printf("has 1 solutions: %g\n", equationData.solutions[0]);
+            printColored("has 1 solutions: %g\n", YELLOW, equationData.solutions[0]);
             break;
         case TWO:
-            printf("has 2 solutions: %g, %g\n",
+            printColored("has 2 solutions: %g, %g\n", GREEN,
                    equationData.solutions[0], equationData.solutions[1]);
             break;
         case INF:
-            printf("has infinitely many solutions\n");
+            printColored("has infinitely many solutions\n", WHITE);
             break;
         default:
-            printf("invalid solutions count\n");
+            printColored("invalid solutions count\n", RED);
             assert(0);
     }
     printf("\n");
@@ -38,17 +39,18 @@ int printSolution(equationData_t equationData) {
     return 0;
 }
 
-int printColored(const char str[], textColor_t textColor) {
-    assert(strlen(str) <= MAX_LINE_LENGTH);
+int printColored(const char format[], textColor_t textColor, ...) {
+    assert(strlen(format) <= MAX_LINE_LENGTH);
 
-    char res[MAX_LINE_LENGTH];
-    res[0] = '\0';
+    char result[MAX_LINE_LENGTH];
+    result[0] = '\0';
 
-    strcat(res, getColorPrefix(textColor));
-    strcat(res, str);
-    strcat(res, COLOR_SUFFIX);
+    va_list args;
+    va_start(args, textColor);
+    vsprintf(result, format, args);
+    va_end(args);
 
-    printf("%s\n", res);
+    printf("%s%s%s\n", getColorPrefix(textColor), result, COLOR_SUFFIX);
 
     return 0;
 }
@@ -60,7 +62,7 @@ const char* getColorPrefix(textColor_t textColor) {
         case RED:
             return "\033[31m";
         case GREEN:
-            return "\033[33m";
+            return "\033[32m";
         case YELLOW:
             return "\033[33m";
         case BLUE:
