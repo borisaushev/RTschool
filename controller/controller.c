@@ -34,11 +34,11 @@ int solveFromFile(char* file) {
 
     // Check if the file was opened successfully
     if (fileStream == NULL) {
-        printf("Error opening file");
+        printColored("Error opening file", RED);
         return 1;
     }
 
-    printf("Quadratic equation solver from file\n");
+    printColored("Quadratic equation solver from file\n", GREEN);
     solveEquationsUntilStop(fileStream);
 
     return 0;
@@ -49,9 +49,9 @@ int solveFromFile(char* file) {
  * @return zero if all fine
  */
 int solveFromConsoleInput() {
-    printf("Quadratic equation solver\n");
-    printf("Add file path as argument to solve equations from a file\n");
-    printf("Ctrl+Z+Enter to stop\n\n");
+    printColored("Quadratic equation solver\n", GREEN);
+    printColored("Add file path as argument to solve equations from a file\n", WHITE);
+    printColored("Ctrl+Z+Enter to stop\n\n", WHITE);
 
     solveEquationsUntilStop(stdin);
 

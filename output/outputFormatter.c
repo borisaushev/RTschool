@@ -3,6 +3,7 @@
 #include "outputFormatter.h"
 
 #include <assert.h>
+#include <string.h>
 
 /**
  * Prints the answer
@@ -30,9 +31,47 @@ int printSolution(equationData_t equationData) {
             break;
         default:
             printf("invalid solutions count\n");
-            assert(1 == 0);
+            assert(0);
     }
     printf("\n");
 
     return 0;
+}
+
+int printColored(const char str[], textColor_t textColor) {
+    assert(strlen(str) <= MAX_LINE_LENGTH);
+
+    char res[MAX_LINE_LENGTH];
+    res[0] = '\0';
+
+    strcat(res, getColorPrefix(textColor));
+    strcat(res, str);
+    strcat(res, COLOR_SUFFIX);
+
+    printf("%s\n", res);
+
+    return 0;
+}
+
+const char* getColorPrefix(textColor_t textColor) {
+    switch (textColor) {
+        case BLACK:
+            return "\033[30m";
+        case RED:
+            return "\033[31m";
+        case GREEN:
+            return "\033[33m";
+        case YELLOW:
+            return "\033[33m";
+        case BLUE:
+            return "\033[34m";
+        case MAGENTA:
+            return "\033[35m";
+        case CYAN:
+            return "\033[36m";
+        case WHITE:
+            return "\033[37m";
+        default:
+            assert(0);
+    }
 }

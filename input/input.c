@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../output/outputFormatter.h"
+
 /**
  *
  * @param line user input
@@ -36,7 +38,7 @@ inputStatus_t getStatusCode(char line[MAX_LINE_LENGTH], int assignedValuesCount)
  */
 inputStatus_t getCoefficients(equationInput_t *coefficients, FILE* stream) {
     if (stream == stdin) {
-        printf("Enter a, b, c coefficients separated by space: \n");
+        printColored("Enter a, b, c coefficients separated by space: \n", CYAN);
     }
 
     char line[MAX_LINE_LENGTH];

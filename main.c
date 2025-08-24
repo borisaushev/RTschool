@@ -1,4 +1,5 @@
 #include "controller/controller.h"
+#include "output/outputFormatter.h"
 #include "tests/tests.h"
 
 int main(int argc, char* argv[]) {
