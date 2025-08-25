@@ -6,29 +6,41 @@
 #include "../calculations/calculations.h"
 #include "tests.h"
 
+#include <stdlib.h>
+
 //!
 //! runs all tests
 //! @return zero if all fine
 //!
 int runTests() {
-    solveEquationTest();
-    solveEquationTestWithFileData();
+    testStats_t testStats = {.failCount = 0, .errorCount = 0};
 
+    solveEquationTest(&testStats);
+    solveEquationTestWithFileData(&testStats);
+
+    printf("failed tests: %d \nerrors in tests: %d\n",
+        testStats.failCount, testStats.errorCount);
+    if (testStats.failCount != 0 || testStats.errorCount != 0) {
+        printf("Tests failed\n");
+        exit(1);
+    }
     printf("Tests run successfully!\n\n");
 
     return 0;
 }
 
-int solveEquationTest() {
-    equationData_t data1 = { {1, 0, -1}, {1,-1}, TWO};
-    equationData_t data2 = { {1, 2, 1}, {-1,0}, ONE};
-    equationData_t data3 = { {1, 0, 1}, {0,0}, ZERO};
-    equationData_t data4 = { {0, 0, 0}, {0,0}, INF};
+int solveEquationTest(testStats_t* testStats) {
+    equationData_t testData[] = {
+        { {1, 0, -1}, {1,-1}, TWO},
+        { {1, 2, 1}, {-1,0}, ONE},
+        { {1, 0, 1}, {0,0}, ZERO},
+        { {0, 0, 0}, {0,0}, INF},
+    };
 
-    assertSolutionEquals(data1);
-    assertSolutionEquals(data2);
-    assertSolutionEquals(data3);
-    assertSolutionEquals(data4);
+    for (size_t i = 0; i < sizeof(testData) / sizeof(equationData_t); i++) {
+        equationData_t testEquationData = testData[i];
+        checkResultAndUpdate(testStats, testEquationData);
+    }
 
     return 0;
 }
@@ -36,15 +48,13 @@ int solveEquationTest() {
 //!
 //! Solves equation with given data, and compares solution with given equation data
 //! @param expectedSolution expected equationData objects after equation solved
-//! @return zero if all fine
+//! @return zero if all fine, one if fail
 //!
-int assertSolutionEquals(equationData_t expectedSolution) {
+testResult_t assertSolutionEquals(equationData_t expectedSolution) {
     equationData_t equationData = {expectedSolution.inputData};
     solveEquation(&equationData);
 
-    assertDataEquals(expectedSolution, equationData);
-
-    return 0;
+    return assertDataEquals(expectedSolution, equationData);
 }
 
 
@@ -54,43 +64,69 @@ int assertSolutionEquals(equationData_t expectedSolution) {
 //! @param equationData second value
 //! @return zero if all fine
 //!
-int assertDataEquals(equationData_t expectedSolution, equationData_t equationData) {
-    assert(expectedSolution.solutionsCount == equationData.solutionsCount);
-
-    assert(equals(expectedSolution.inputData.a, equationData.inputData.a));
-    assert(equals(expectedSolution.inputData.b, equationData.inputData.b));
-    assert(equals(expectedSolution.inputData.c, equationData.inputData.c));
+testResult_t assertDataEquals(const equationData_t expectedSolution, const equationData_t equationData) {
+    if(expectedSolution.solutionsCount != equationData.solutionsCount
+        || !equals(expectedSolution.inputData.a, equationData.inputData.a)
+        || !equals(expectedSolution.inputData.b, equationData.inputData.b)
+        || !equals(expectedSolution.inputData.c, equationData.inputData.c)) {
+        return TEST_CASE_FAIL;
+    }
 
     switch (expectedSolution.solutionsCount) {
         case ZERO: {
-            break;
+            return TEST_SUCCESS;
         }
         case INF: {
-            break;
+            return TEST_SUCCESS;
         }
         case ONE: {
-            assert(equals(expectedSolution.solutions[0], equationData.solutions[0]));
-            break;
+            if (!equals(expectedSolution.solutions[0], equationData.solutions[0])) {
+                return TEST_CASE_FAIL;
+            }
+            return TEST_SUCCESS;
         }
         case TWO: {
-            assert(equals(expectedSolution.solutions[0], equationData.solutions[0]));
-            assert(equals(expectedSolution.solutions[1], equationData.solutions[1]));
-            break;
+            if (!equals(expectedSolution.solutions[0], equationData.solutions[0])
+             || !equals(expectedSolution.solutions[1], equationData.solutions[1])) {
+                return TEST_CASE_FAIL;
+            }
+            return TEST_SUCCESS;
         }
         default: {
             printf("Wrong solutionsCount\n");
-            assert(0);
+            return TEST_ERROR;
         }
+    }
+
+    return TEST_SUCCESS;
+}
+
+int checkResultAndUpdate(testStats_t *testStats, equationData_t expectedData) {
+    testResult_t result = assertSolutionEquals(expectedData);
+    switch (result) {
+        case TEST_SUCCESS:
+            break;
+        case TEST_CASE_FAIL:
+            testStats->failCount++;
+            break;
+        case TEST_ERROR:
+            testStats->errorCount++;
+            break;
+        default:
+            break;
     }
 
     return 0;
 }
 
-int solveEquationTestWithFileData() {
+int solveEquationTestWithFileData(testStats_t* testStats) {
     FILE* fileStream = fopen(TEST_DATA_FILE_PATH, "r");
 
     // Check if the file was opened successfully
-    assert(fileStream != NULL);
+    if(fileStream == NULL) {
+        testStats->errorCount++;
+        return 0;
+    }
 
     char inputLine[MAX_LINE_LENGTH];
     double a = 0, b = 0, c = 0;
@@ -112,20 +148,21 @@ int solveEquationTestWithFileData() {
         equationData_t expectedData = {{a,b,c},
             {x1, x2}, getSolutionsCount(rootsCount)};
         //checking if solver works as expected
-        assertSolutionEquals(expectedData);
+        checkResultAndUpdate(testStats, expectedData);
 
         //skipping unused line
         fgets(inputLine, MAX_LINE_LENGTH-1, fileStream);
     }
 
-    return 0;
+    return TEST_SUCCESS;
 }
 
-//!
+//---------------------------------------------------
 //! Returns solutionsCount integer equivalent
 //! @param solutionsCount solutionsCount value
-//! @return integer equivalent of it
-//!
+//! @return integer equivalent of it, or TEST_ERROR if error
+//---------------------------------------------------
+
 solutionsCount_t getSolutionsCount(int solutionsCount) {
     switch (solutionsCount) {
         case 0:
@@ -137,7 +174,6 @@ solutionsCount_t getSolutionsCount(int solutionsCount) {
         case -1:
             return INF;
         default:
-            printf("unexpected solutions count in file test data");
-            assert(0);
+            return ZERO;
     }
 }

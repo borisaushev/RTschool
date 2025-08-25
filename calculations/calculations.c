@@ -97,6 +97,7 @@ int solveSquareEquation(equationData_t *equationData) {
 int solveLinearEquation(equationData_t *equationData) {
     double b = equationData->inputData.b;
     double c = equationData->inputData.c;
+
     if (!isZero(b)) {
         // equation is linear
         double x = -c / b;

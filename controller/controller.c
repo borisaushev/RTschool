@@ -13,10 +13,10 @@
 //!@param argv console args
 //!@return zero if all fine
 //!
-int startSolver(int argc, char **argv) {
+int startSolver(int argc, const char **argv) {
     for (int i = 1; i < argc - 1; ++i) {
-        if (!strcmp(argv[i], FILE_FLAG)) {
-            char* filePath = argv[i+1];
+        if (strcmp(argv[i], FILE_FLAG) != 0) {
+           const  char* filePath = argv[i+1];
             solveFromFile(filePath);
             return 0;
         }
@@ -32,7 +32,7 @@ int startSolver(int argc, char **argv) {
 //! @param file file path as string
 //! @return - zero if all fine - one if file didn't open
 //!
-int solveFromFile(char* file) {
+int solveFromFile(const char* file) {
     FILE* fileStream = fopen(file, "r");
 
     // Check if the file was opened successfully
@@ -78,14 +78,18 @@ inputStatus_t solveEquationsUntilStop(FILE* stream) {
             solveEquation(&equationData);
             printSolution(equationData);
             return STOPPED;
+
         case INVALID_INPUT:
             printColored(RED, "invalid input");
             return INVALID_INPUT;
+
         case STOPPED:
             printColored(WHITE, "program stopped");
             return STOPPED;
+
         case SUCCESS:
             return SUCCESS;
+
         default:
             printColored(RED, "invalid program status");
             assert(0);

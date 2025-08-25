@@ -8,11 +8,11 @@
 #include <stdarg.h>
 #include <string.h>
 
-//!
+//--------------------------------
 //! Prints the answer
 //! @param equationData all info about equation and ints solutions
 //! @return zero if all fine
-//!
+//--------------------------------
 int printSolution(equationData_t equationData) {
     double a = equationData.inputData.a, b = equationData.inputData.b, c = equationData.inputData.c;
 
@@ -47,20 +47,18 @@ int printSolution(equationData_t equationData) {
 //! @param format printf-like format
 //! @param ... print-like parameters
 //! @return zero if all fine
-//!/
+//!
 int printColored(textColor_t textColor, const char format[],  ...) {
     assert(strlen(format) <= MAX_LINE_LENGTH);
-
-    char result[MAX_LINE_LENGTH];
-    result[0] = '\0';
+    printf("%s", getColorPrefix(textColor));
 
     //formatting string
     va_list args;
     va_start(args, format);
-    vsprintf(result, format, args);
+    vfprintf(stdout, format, args);
     va_end(args);
 
-    printf("%s%s%s\n", getColorPrefix(textColor), result, COLOR_SUFFIX);
+    printf("%s\n", COLOR_SUFFIX);
 
     return 0;
 }

@@ -5,12 +5,12 @@
 
 const char* const FILE_FLAG = "-FILE";
 
-int startSolver(int argc, char **argv);
+int startSolver(int argc, const char **argv);
 
 inputStatus_t solveEquationsUntilStop(FILE* stream);
 
 int solveFromConsoleInput();
 
-int solveFromFile(char* file);
+int solveFromFile(const char* file);
 
 #endif //SIMPLE_EXAMPLE_CONTROLLER_H
