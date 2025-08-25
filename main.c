@@ -4,11 +4,9 @@
 
 
 int main(int argc, const char* argv[]) {
-
     #ifdef TESTS_ENABLED
         runTests();
     #endif // TESTS_ENABLED
-
 
     startSolver(argc, argv);
 

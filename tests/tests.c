@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 //!
-//! runs all tests
+//! runs all tests and stops program if fails occur
 //! @return zero if all fine
 //!
 int runTests() {
@@ -62,7 +62,7 @@ testResult_t assertSolutionEquals(equationData_t expectedSolution) {
 //! fails if corresponding values in 2 given values differ
 //! @param expectedSolution first value
 //! @param equationData second value
-//! @return zero if all fine
+//! @return tests result
 //!
 testResult_t assertDataEquals(const equationData_t expectedSolution, const equationData_t equationData) {
     if(expectedSolution.solutionsCount != equationData.solutionsCount
@@ -160,7 +160,7 @@ int solveEquationTestWithFileData(testStats_t* testStats) {
 //---------------------------------------------------
 //! Returns solutionsCount integer equivalent
 //! @param solutionsCount solutionsCount value
-//! @return integer equivalent of it, or TEST_ERROR if error
+//! @return integer equivalent of it
 //---------------------------------------------------
 
 solutionsCount_t getSolutionsCount(int solutionsCount) {
