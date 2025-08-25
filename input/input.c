@@ -2,6 +2,7 @@
 
 #include "input.h"
 #include "../output/outputFormatter.h"
+#include "../secret_stuff/secret.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -52,9 +53,24 @@ inputStatus_t getCoefficients(equationInput_t *coefficients, FILE* stream) {
         }
     }
 
+    if (isASuperSecretWord(line)) {
+        doSecretGangsterShit(line);
+        return SECRET_WORD;
+    }
+
     //it's a line, trying to parse it
     int assignedValuesCount = sscanf(line, "%lg %lg %lg",
         &coefficients->a, &coefficients->b, &coefficients->c);
 
     return getStatusCode(line, assignedValuesCount);
+}
+
+int isASuperSecretWord(char line[]) {
+    for (size_t i = 0; i < sizeof(SECRET_WORDS)/MAX_LINE_LENGTH; i++) {
+        if (strcmp(SECRET_WORDS[i], line) == 0) {
+            return 1;
+        }
+    }
+
+    return 0;
 }

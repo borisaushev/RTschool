@@ -8,8 +8,8 @@ CFLAGS= -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equa
 		-D_DEBUG -D_EJUDGE_CLIENT_SIDE\
 		-I.
 
-DEPS = ./calculations/calculations.h ./input/input.h ./output/outputFormatter.h ./tests/tests.h ./controller/controller.h
-SRC = ./calculations/calculations.c ./input/input.c ./output/outputFormatter.c ./tests/tests.c ./controller/controller.c main.c
+DEPS = ./calculations/calculations.h ./input/input.h ./output/outputFormatter.h ./tests/tests.h ./controller/controller.h ./secret_stuff/secret.h
+SRC = ./calculations/calculations.c ./input/input.c ./output/outputFormatter.c ./tests/tests.c ./controller/controller.c ./secret_stuff/secret.c main.c
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

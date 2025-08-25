@@ -37,3 +37,8 @@ Build and run with flags:
 ```bash
   .\build.exe
 ```
+
+супер секретные слова (ввести точно не вместо коофицентов)
+- arsen_sigma
+- accept_your_destiny
+- sinners_fate
