@@ -4,11 +4,11 @@
 -------------------
 Build: 
 ```bash
-  make
+  make release
 ```
 Run:
 ```bash
-  .\build.exe
+  .\release.exe
 ```
 
 If you want to run on data from file, you need a file with such structure:
@@ -22,4 +22,18 @@ Run with data from file
   .\build.exe --FILE <your_file_path>
 ```
 
+Build and run with tests:
+```bash
+  make test
+```
+```bash
+  .\test.exe
+```
 
+Build and run with flags:
+```bash
+  make build
+```
+```bash
+  .\build.exe
+```

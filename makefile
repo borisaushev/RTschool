@@ -6,15 +6,23 @@ CFLAGS= -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equa
 		-Wno-missing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo\
 		-Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -Werror=vla\
 		-D_DEBUG -D_EJUDGE_CLIENT_SIDE\
-		-DTESTS_ENABLED\
 		-I.
 
 DEPS = ./calculations/calculations.h ./input/input.h ./output/outputFormatter.h ./tests/tests.h ./controller/controller.h
-OBJ = ./calculations/calculations.c ./input/input.c ./output/outputFormatter.c ./tests/tests.c ./controller/controller.c main.c
+SRC = ./calculations/calculations.c ./input/input.c ./output/outputFormatter.c ./tests/tests.c ./controller/controller.c main.c
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-build: $(OBJ)
+build: $(SRC)
 	$(CC) -o $@ $^ $(CFLAGS)
-	$(CC) $(OBJ)
+	$(CC) $(SRC)
+
+test: $(SRC)
+	$(CC) -o $@ $^ $(CFLAGS) -DTESTS_ENABLED
+	$(CC) $(SRC)
+
+release: $(SRC)
+	$(CC) -o $@ $^
+	$(CC) $(SRC)
+
