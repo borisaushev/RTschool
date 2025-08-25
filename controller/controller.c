@@ -16,7 +16,7 @@
 int startSolver(int argc, const char **argv) {
     for (int i = 1; i < argc - 1; ++i) {
         if (strcmp(argv[i], FILE_FLAG) != 0) {
-           const  char* filePath = argv[i+1];
+            const  char* filePath = argv[i+1];
             solveFromFile(filePath);
             return 0;
         }

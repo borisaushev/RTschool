@@ -1,6 +1,6 @@
 #include "controller/controller.h"
 #include "tests/tests.h"
-// .\build.exe -FILE "C:\Users\bossb\CLionProjects\untitled\tests\textdata.txt"
+// .\build.exe --FILE "C:\Users\bossb\CLionProjects\untitled\tests\textdata.txt"
 
 
 int main(int argc, const char* argv[]) {
