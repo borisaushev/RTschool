@@ -58,7 +58,7 @@ int printColored(textColor_t textColor, const char format[],  ...) {
     vfprintf(stdout, format, args);
     va_end(args);
 
-    printf("%s\n", COLOR_SUFFIX);
+    printf("%s", COLOR_SUFFIX);
 
     return 0;
 }

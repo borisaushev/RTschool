@@ -1,6 +1,12 @@
-## SQUARE EQUATION SOLVER
+## BorissScript (.Boss)
 ### By BossBoriss
 
+-------------------
+#### Поддерживаемые команды
+- square_solver
+- arsen_sigma
+- counting_stars
+- see_the_monster
 -------------------
 Build: 
 ```bash
@@ -38,7 +44,3 @@ Build and run with flags:
   .\build.exe
 ```
 
-супер секретные слова (ввести точно не вместо коофицентов)
-- arsen_sigma
-- accept_your_destiny
-- sinners_fate

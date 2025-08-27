@@ -2,8 +2,8 @@
 
 #include <assert.h>
 
-#include "../input/input.h"
-#include "../calculations/calculations.h"
+#include "../commands/square_solver/input/input.h"
+#include "../commands/square_solver/calculations/calculations.h"
 #include "tests.h"
 
 #include <stdlib.h>
@@ -162,7 +162,6 @@ int solveEquationTestWithFileData(testStats_t* testStats) {
 //! @param solutionsCount solutionsCount value
 //! @return integer equivalent of it
 //---------------------------------------------------
-
 solutionsCount_t getSolutionsCount(int solutionsCount) {
     switch (solutionsCount) {
         case 0:

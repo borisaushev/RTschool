@@ -1,7 +1,7 @@
 #ifndef SIMPLE_EXAMPLE_TESTS_H
 #define SIMPLE_EXAMPLE_TESTS_H
 
-#include "../calculations/calculations.h"
+#include "../commands/square_solver/calculations/calculations.h"
 
 typedef enum testResult {
     TEST_ERROR, TEST_SUCCESS, TEST_CASE_FAIL

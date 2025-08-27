@@ -1,16 +1,28 @@
-#ifndef SIMPLE_EXAMPLE_CONTROLLER_H
-#define SIMPLE_EXAMPLE_CONTROLLER_H
+#ifndef BOSSBORISS_CONTROLLER_H
+#define BOSSBORISS_CONTROLLER_H
+
 #include <stdio.h>
-#include "../input/input.h"
 
-const char* const FILE_FLAG = "--FILE";
+typedef enum command {
+    SQUARE_SOLVER, ARSEN_SIGMA, COUNTING_STARS, SEE_THE_MONSTER,
+    STOP_PROGRAM,
+    NOT_A_COMMAND
+} command_t;
 
-int startSolver(int argc, const char **argv);
+int greetUser();
 
-inputStatus_t solveEquationsUntilStop(FILE* stream);
+int getFilePath(char* file, const int argc, const char** argv);
 
-int solveFromConsoleInput();
+int startBorissScript(int argc, const char **argv);
 
-int solveFromFile(const char* file);
+int scriptFromFile(char* file, const int argc, const char **argv);
 
-#endif //SIMPLE_EXAMPLE_CONTROLLER_H
+int scriptFromConsole(int argc, const char **argv);
+
+int runCommandsUntilStops(FILE* stream, const int argc, const char **argv);
+
+command_t getCommand(FILE* stream);
+
+int processCommand(command_t command, const int argc, const char **argv);
+
+#endif //BOSSBORISS_CONTROLLER_H
