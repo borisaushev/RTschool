@@ -210,7 +210,10 @@ int processCommand(command_t command, const int argc, const char **argv) {
             printColored(RED, "invalid command");
             break;
         default:
-            printColored(RED, "invalid command value");
+            #ifdef DEBUG
+                printColored(RED, "invalid command value");
+            #endif //DEBUG
+
             exit(1);
     }
 

@@ -12,10 +12,10 @@
 //!
 //! @param line user input
 //! @param assignedValuesCount assigned values count
-//! @return
-//!- STOPPED if user stops program manually
-//!- INVALID_INPUT if user inputs wrong values
-//!- LAST_LINE if user inputs correct values ended with EOF
+//! @return one of:
+//! - STOPPED if user stops program manually
+//! - INVALID_INPUT if user inputs wrong values
+//! - LAST_LINE if user inputs correct values ended with EOF
 //!
 inputStatus_t getStatusCode(const char line[MAX_LINE_LENGTH], int assignedValuesCount) {
     assert(line != NULL);
@@ -66,4 +66,3 @@ inputStatus_t getCoefficients(equationInput_t *coefficients, FILE* stream) {
 
     return getStatusCode(line, assignedValuesCount);
 }
-

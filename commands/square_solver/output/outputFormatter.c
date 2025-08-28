@@ -33,8 +33,10 @@ int printSolution(equationData_t equationData) {
             printColored(WHITE, "has infinitely many solutions\n");
             break;
         default:
-            printColored(RED, "invalid solutions count\n");
-            assert(0);
+            #ifdef DEBUG
+                printColored(RED, "invalid solutions count\n");
+                assert(0);
+            #endif //DEBUG
     }
     printf("\n");
 

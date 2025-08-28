@@ -68,4 +68,3 @@ test: $(SRC)
 release: $(SRC)
 	$(CC) -o make_output/$@ $^
 	$(CC) $(SRC) -o make_output
-

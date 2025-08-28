@@ -74,12 +74,8 @@ inputStatus_t solveEquationsUntilStop(FILE* stream) {
 
     equationData_t equationData;
     inputStatus_t programStatus = SUCCESS;
-    while ((programStatus = getCoefficients(&equationData.inputData, stream)) == SUCCESS
-        || programStatus == SECRET_WORD) {
+    while ((programStatus = getCoefficients(&equationData.inputData, stream)) == SUCCESS) {
         solveEquation(&equationData);
-        if (programStatus == SECRET_WORD) {
-            continue;
-        }
         printSolution(equationData);
     }
 
@@ -99,9 +95,6 @@ inputStatus_t solveEquationsUntilStop(FILE* stream) {
 
         case SUCCESS:
             return SUCCESS;
-
-        case SECRET_WORD:
-            return SECRET_WORD;
 
         default:
             printColored(RED, "invalid program status");
