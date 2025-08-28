@@ -37,7 +37,7 @@ int printSolution(equationData_t equationData) {
                 printColored(RED, "invalid solutions count\n");
                 assert(0);
             #endif //DEBUG
-        return 0;
+            break;
     }
     printf("\n");
 
