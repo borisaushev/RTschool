@@ -13,11 +13,12 @@ int main(int argc, const char* argv[]) {
     #endif // TESTS_ENABLED
 
     startBorissScript(argc, argv);
-    //startSolver(argc, argv);
 
-    printf("\n\\--------------");
-    printf("COMMIT RN VRO");
-    printf("--------------\n");
+    #ifdef DEBUG
+        printf("\n\\--------------");
+        printf("COMMIT RN VRO");
+        printf("--------------\n");
+    #endif // DEBUG
 
     return 0;
 }
