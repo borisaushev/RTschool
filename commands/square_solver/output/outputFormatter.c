@@ -1,4 +1,4 @@
- * @file
+//!@file
 
 #include <stdio.h>
 #include "../calculations/calculations.h"

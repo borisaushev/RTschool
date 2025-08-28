@@ -1,3 +1,5 @@
+//!@file
+
 #include "input.h"
 
 #include <assert.h>

@@ -1,4 +1,4 @@
-#include <assert.h>
+//!@file
 
 #include "../commands/square_solver/input/input.h"
 #include "../commands/square_solver/calculations/calculations.h"

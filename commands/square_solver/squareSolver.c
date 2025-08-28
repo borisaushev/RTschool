@@ -1,3 +1,5 @@
+//!@file
+
 #include "squareSolver.h"
 #include "input/input.h"
 #include "calculations/calculations.h"

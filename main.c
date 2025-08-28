@@ -1,4 +1,5 @@
-#include "commands/square_solver/squareSolver.h"
+//!@file
+
 #include "tests/tests.h"
 #include <windows.h>
 

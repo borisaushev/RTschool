@@ -1,4 +1,4 @@
-#include "controller.h"
+//!@file
 
 #include <assert.h>
 #include <stdio.h>
@@ -9,6 +9,7 @@
 #include "../commands/square_solver/squareSolver.h"
 #include "../commands/square_solver/output/outputFormatter.h"
 #include "../commands/commands.h"
+#include "controller.h"
 
 /**
  * Finds file path (if specified)
