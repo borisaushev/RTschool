@@ -42,8 +42,8 @@ CFLAGS= -Wshadow \
 
 DEPS = ./commands/square_solver/calculations/calculations.h \
  	   ./commands/square_solver/input/input.h \
- 	   ./commands/square_solver/output/outputFormatter.h\ \
- 	   ./tests/tests.h\ \
+ 	   ./commands/square_solver/output/outputFormatter.h \
+ 	   ./tests/tests.h \
  	   ./controller/controller.h \
  	   ./commands/commands.h \
  	   ./commands/square_solver/squareSolver.h \
@@ -57,18 +57,15 @@ SRC = ./commands/square_solver/calculations/calculations.c \
 	  ./commands/square_solver/squareSolver.c \
 	  main.c
 
-%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
-
 build: $(SRC)
-	$(CC) -o $@ $^ $(CFLAGS) -D_DEBUG
-	$(CC) $(SRC)
+	$(CC) -o make_output/$@ $^ $(CFLAGS) -D_DEBUG
+	$(CC) $(SRC) -o make_output
 
 test: $(SRC)
-	$(CC) -o $@ $^ $(CFLAGS) -DTESTS_ENABLED -D_DEBUG
-	$(CC) $(SRC)
+	$(CC) -o make_output/$@ $^ $(CFLAGS) -DTESTS_ENABLED -D_DEBUG
+	$(CC) $(SRC) -o make_output
 
 release: $(SRC)
-	$(CC) -o $@ $^
-	$(CC) $(SRC)
+	$(CC) -o make_output/$@ $^
+	$(CC) $(SRC) -o make_output
 

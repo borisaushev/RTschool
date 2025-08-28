@@ -3,7 +3,7 @@
 #include <windows.h>
 
 #include "controller/controller.h"
-// .\build.exe --SQUARE_FILE "C:\Users\bossb\CLionProjects\untitled\tests\textdata.txt"
+// .\make_output\build.exe --SQUARE_FILE "C:\Users\bossb\CLionProjects\untitled\tests\textdata.txt"
 
 int main(int argc, const char* argv[]) {
     system("chcp 65001");
