@@ -1,5 +1,3 @@
-//! @file
-
 #include "squareSolver.h"
 #include "input/input.h"
 #include "calculations/calculations.h"
@@ -9,11 +7,11 @@
 #include <assert.h>
 #include <string.h>
 
-//!
-//! @param argc console arguments count
-//! @param argv console args
-//! @return zero if all fine
-//!
+/**
+ *  @param argc console arguments count
+ *  @param argv console args
+ *  @return zero if all fine
+*/
 int startSolver(int argc, const char **argv) {
     assert(argv != NULL);
     assert(argc >= 0);
@@ -29,11 +27,11 @@ int startSolver(int argc, const char **argv) {
     return 0;
 }
 
-//!
-//! Solves equations from file, stored as 3 coof's per line separated by space
-//! @param file file path as string
-//! @return - zero if all fine - one if file didn't open
-//!
+/**
+ *  Solves equations from file, stored as 3 coof's per line separated by space
+ *  @param file file path as string
+ *  @return - zero if all fine - one if file didn't open
+*/
 int solveFromFile(const char* file) {
     assert(file != NULL);
 
@@ -51,10 +49,10 @@ int solveFromFile(const char* file) {
     return 0;
 }
 
-//!
-//!Gets console input and solves the equation itself untill user stops it
-//!@return zero if all fine
-//!
+/**
+ * Gets console input and solves the equation itself untill user stops it
+ * @return zero if all fine
+*/
 int solveFromConsoleInput() {
     printColored(GREEN, "Quadratic equation solver\n");
     printColored(WHITE, "Add file path as argument (--SQUARE_FILE) to solve equations from a file\n");
@@ -65,10 +63,10 @@ int solveFromConsoleInput() {
     return 0;
 }
 
-//!
-//!@param stream stream, from which the data is read
-//!@return input status
-//!
+/**
+ * @param stream stream, from which the data is read
+ * @return input status
+*/
 inputStatus_t solveEquationsUntilStop(FILE* stream) {
     assert(stream != NULL);
 
@@ -102,6 +100,3 @@ inputStatus_t solveEquationsUntilStop(FILE* stream) {
             return INVALID_INPUT;
     }
 }
-
-
-

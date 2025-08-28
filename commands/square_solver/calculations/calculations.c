@@ -1,5 +1,3 @@
-//! @file
-
 #include <float.h>
 #include <math.h>
 
@@ -8,37 +6,37 @@
 
 #include <assert.h>
 
-//!
-//! @param value double value
-//! @return if the value is zero
-//!
+/**
+ * @param value double value
+ * @return if the value is zero
+*/
 int isZero(double value) {
     return fabs(value) < FLT_EPSILON;
 }
 
-//! 
-//! Compares 2 double values correctly
-//! @param n1 value 1
-//! @param n2 value 2
-//! @return if 2 values are equal
-//!
+/**
+ * Compares 2 double values correctly
+ * @param n1 value 1
+ * @param n2 value 2
+ * @return if 2 values are equal
+*/
 int equals(double n1, double n2) {
     return fabs(n1 - n2) < FLT_EPSILON;
 }
 
-//! 
-//! @param value double value
-//! @return if the value is less then zero
-//!
+/**
+ * @param value double value
+ * @return if the value is less then zero
+*/
 int lessThenZero(double value) {
     return value + FLT_EPSILON < 0;
 }
 
-//! 
-//! solves equation and writes roots values in parameter
-//! @param equationData pointer to the data struct object to write roots in
-//! @return 0 if all fine
-//!
+/**
+ * solves equation and writes roots values in parameter
+ * @param equationData pointer to the data struct object to write roots in
+ * @return 0 if all fine
+*/
 int solveEquation(equationData_t *equationData) {
     assert(equationData != NULL);
 
@@ -54,12 +52,12 @@ int solveEquation(equationData_t *equationData) {
     return 0;
 }
 
-//! 
-//! solves square equation and writes roots in param pointer,
-//! only called if a-koof is non-zero
-//! @param equationData pointer to the data struct object to write roots in
-//! @return zero if all fine
-//!
+/**
+ * solves square equation and writes roots in param pointer,
+ * only called if a-koof is non-zero
+ * @param equationData pointer to the data struct object to write roots in
+ * @return zero if all fine
+*/
 int solveSquareEquation(equationData_t *equationData) {
     assert(equationData != NULL);
 
@@ -94,12 +92,12 @@ int solveSquareEquation(equationData_t *equationData) {
     return 0;
 }
 
-//! 
-//! solves linear equation and writes roots in param pointer,
-//! only called if a-koof is zero
-//! @param equationData pointer to the data struct object to write roots in
-//! @return zero if all fine
-//!
+/**
+ * solves linear equation and writes roots in param pointer,
+ * only called if a-koof is zero
+ * @param equationData pointer to the data struct object to write roots in
+ * @return zero if all fine
+*/
 int solveLinearEquation(equationData_t *equationData) {
     assert(equationData != NULL);
 

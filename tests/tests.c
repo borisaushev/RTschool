@@ -1,5 +1,3 @@
-//! @file
-
 #include <assert.h>
 
 #include "../commands/square_solver/input/input.h"
@@ -8,10 +6,10 @@
 
 #include <stdlib.h>
 
-//!
-//! runs all tests and stops program if fails occur
-//! @return zero if all fine
-//!
+/**
+ * runs all tests and stops program if fails occur
+ * @return zero if all fine
+*/
 int runTests() {
     testStats_t testStats = {.failCount = 0, .errorCount = 0};
 
@@ -45,11 +43,11 @@ int solveEquationTest(testStats_t* testStats) {
     return 0;
 }
 
-//!
-//! Solves equation with given data, and compares solution with given equation data
-//! @param expectedSolution expected equationData objects after equation solved
-//! @return zero if all fine, one if fail
-//!
+/**
+ * Solves equation with given data, and compares solution with given equation data
+ * @param expectedSolution expected equationData objects after equation solved
+ * @return zero if all fine, one if fail
+*/
 testResult_t assertSolutionEquals(equationData_t expectedSolution) {
     equationData_t equationData = {expectedSolution.inputData};
     solveEquation(&equationData);
@@ -58,12 +56,12 @@ testResult_t assertSolutionEquals(equationData_t expectedSolution) {
 }
 
 
-//!
-//! fails if corresponding values in 2 given values differ
-//! @param expectedSolution first value
-//! @param equationData second value
-//! @return tests result
-//!
+ /**
+ * fails if corresponding values in 2 given values differ
+ * @param expectedSolution first value
+ * @param equationData second value
+ * @return tests result
+ */
 testResult_t assertDataEquals(const equationData_t expectedSolution, const equationData_t equationData) {
     if(expectedSolution.solutionsCount != equationData.solutionsCount
         || !equals(expectedSolution.inputData.a, equationData.inputData.a)
@@ -168,11 +166,11 @@ int solveEquationTestWithFileData(testStats_t* testStats) {
     return 0;
 }
 
-//---------------------------------------------------
-//! Returns solutionsCount integer equivalent
-//! @param solutionsCount solutionsCount value
-//! @return integer equivalent of it
-//---------------------------------------------------
+/**
+ * Returns solutionsCount integer equivalent
+ * @param solutionsCount solutionsCount value
+ * @return integer equivalent of it
+*/
 solutionsCount_t getSolutionsCount(int solutionsCount) {
     switch (solutionsCount) {
         case 0:

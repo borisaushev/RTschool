@@ -1,4 +1,4 @@
-//! @file
+ * @file
 
 #include <stdio.h>
 #include "../calculations/calculations.h"
@@ -8,11 +8,11 @@
 #include <stdarg.h>
 #include <string.h>
 
-//--------------------------------
-//! Prints the answer
-//! @param equationData all info about equation and ints solutions
-//! @return zero if all fine
-//--------------------------------
+/**
+ * Prints the answer
+ * @param equationData all info about equation and ints solutions
+ * @return zero if all fine
+*/
 int printSolution(equationData_t equationData) {
     double a = equationData.inputData.a, b = equationData.inputData.b, c = equationData.inputData.c;
 
@@ -43,13 +43,13 @@ int printSolution(equationData_t equationData) {
     return 0;
 }
 
-//!
-//! prints custom color text with formatted string
-//! @param textColor text color
-//! @param format printf-like format
-//! @param ... print-like parameters
-//! @return zero if all fine
-//!
+/**
+ * prints custom color text with formatted string
+ * @param textColor text color
+ * @param format printf-like format
+ * @param ... print-like parameters
+ * @return zero if all fine
+*/
 int printColored(textColor_t textColor, const char format[],  ...) {
     assert(strlen(format) <= MAX_LINE_LENGTH);
 
@@ -66,11 +66,11 @@ int printColored(textColor_t textColor, const char format[],  ...) {
     return 0;
 }
 
-//!
-//! return color prefix string for given text color
-//! @param textColor text color
-//! @return prefix for given color to use in printf
-//!
+/**
+ * return color prefix string for given text color
+ * @param textColor text color
+ * @return prefix for given color to use in printf
+*/
 const char* getColorPrefix(textColor_t textColor) {
     switch (textColor) {
         case BLACK:
