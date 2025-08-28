@@ -11,7 +11,7 @@ typedef enum command {
 
 int greetUser();
 
-int getFilePath(char* file, const int argc, const char** argv);
+int getFilePath(char* file, const int argc, const char** argv, const char* fileFlag);
 
 int startBorissScript(int argc, const char **argv);
 

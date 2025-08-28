@@ -24,7 +24,7 @@ typedef struct equationInput {
 
 inputStatus_t getCoefficients(equationInput_t *coefficients, FILE* stream);
 
-inputStatus_t getStatusCode(char line[MAX_LINE_LENGTH], int assignedValuesCount);
+inputStatus_t getStatusCode(const char line[MAX_LINE_LENGTH], int assignedValuesCount);
 
 int getLine(char(*line)[MAX_LINE_LENGTH]);
 

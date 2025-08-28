@@ -1,6 +1,9 @@
 //! @file
 
 #include "input.h"
+
+#include <assert.h>
+
 #include "../output/outputFormatter.h"
 
 #include <stdio.h>
@@ -14,7 +17,9 @@
 //!- INVALID_INPUT if user inputs wrong values
 //!- LAST_LINE if user inputs correct values ended with EOF
 //!
-inputStatus_t getStatusCode(char line[MAX_LINE_LENGTH], int assignedValuesCount) {
+inputStatus_t getStatusCode(const char line[MAX_LINE_LENGTH], int assignedValuesCount) {
+    assert(line != NULL);
+
     if (assignedValuesCount == EOF) {
         return STOPPED;
     }
@@ -37,6 +42,9 @@ inputStatus_t getStatusCode(char line[MAX_LINE_LENGTH], int assignedValuesCount)
 //! - getStatusCode() value otherwise
 //!
 inputStatus_t getCoefficients(equationInput_t *coefficients, FILE* stream) {
+    assert(stream != NULL);
+    assert(coefficients != NULL);
+
     if (stream == stdin) {
         printColored(CYAN, "Enter a, b, c coefficients separated by space: \n");
     }

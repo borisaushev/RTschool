@@ -26,6 +26,8 @@ int setMaxVolume() {
  * @return zero if all fine
  */
 int playSound(const char *soundPath) {
+    assert(soundPath != NULL);
+
     char command[MAX_LINE_LENGTH];
     snprintf(command, sizeof(command), "%s%s", SOUND_PLAYER_COMMAND, soundPath);
     system(command);
@@ -39,6 +41,8 @@ int playSound(const char *soundPath) {
  * @return zero if all fine
  */
 int playVideo(const char *videoPath) {
+    assert(videoPath != NULL);
+
     char command[MAX_LINE_LENGTH];
     snprintf(command, sizeof(command), "%s%s", VIDEO_PLAYER_COMMAND, videoPath);
     system(command);
@@ -52,6 +56,8 @@ int playVideo(const char *videoPath) {
  * @return zero if all fine
  */
 int openLink(const char* link) {
+    assert(link != NULL);
+
     char command[MAX_LINE_LENGTH];
     snprintf(command, sizeof(command), "%s%s", EDGE_COMMAND, link);
     system(command);
@@ -172,6 +178,9 @@ int seeTheMonster() {
  * @return zero if all fine
  */
 int squareSolver(int argc, const char **argv) {
+    assert(argc >= 0);
+    assert(argv != NULL);
+
     startSolver(argc, argv);
 
     return 0;

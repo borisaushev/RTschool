@@ -5,21 +5,35 @@ CFLAGS= -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-equa
 		-Wctor-dtor-privacy -Wempty-body -Wformat-security -Wformat=2 -Wignored-qualifiers -Wlogical-op\
 		-Wno-missing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo\
 		-Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -Werror=vla\
-		-D_DEBUG -D_EJUDGE_CLIENT_SIDE\
+		-D_EJUDGE_CLIENT_SIDE\
 		-I.
 
-DEPS = ./commands/square_solver/calculations/calculations.h ./commands/square_solver/input/input.h ./commands/square_solver/output/outputFormatter.h ./tests/tests.h ./controller/controller.h ./commands/commands.h ./commands/square_solver/squareSolver.h
-SRC = ./commands/square_solver/calculations/calculations.c ./commands/square_solver/input/input.c ./commands/square_solver/output/outputFormatter.c ./tests/tests.c ./controller/controller.c ./commands/commands.c ./commands/square_solver/squareSolver.c main.c
+DEPS = ./commands/square_solver/calculations/calculations.h \
+ 	   ./commands/square_solver/input/input.h \
+ 	   ./commands/square_solver/output/outputFormatter.h\ \
+ 	   ./tests/tests.h\ \
+ 	   ./controller/controller.h \
+ 	   ./commands/commands.h \
+ 	   ./commands/square_solver/squareSolver.h \
+
+SRC = ./commands/square_solver/calculations/calculations.c \
+	  ./commands/square_solver/input/input.c \
+	  ./commands/square_solver/output/outputFormatter.c \
+	  ./tests/tests.c \
+	  ./controller/controller.c \
+	  ./commands/commands.c \
+	  ./commands/square_solver/squareSolver.c \
+	  main.c
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 build: $(SRC)
-	$(CC) -o $@ $^ $(CFLAGS)
+	$(CC) -o $@ $^ $(CFLAGS) -D_DEBUG
 	$(CC) $(SRC)
 
 test: $(SRC)
-	$(CC) -o $@ $^ $(CFLAGS) -DTESTS_ENABLED
+	$(CC) -o $@ $^ $(CFLAGS) -DTESTS_ENABLED -D_DEBUG
 	$(CC) $(SRC)
 
 release: $(SRC)

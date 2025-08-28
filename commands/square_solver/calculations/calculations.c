@@ -6,6 +6,8 @@
 #include "../input/input.h"
 #include "calculations.h"
 
+#include <assert.h>
+
 //!
 //! @param value double value
 //! @return if the value is zero
@@ -38,6 +40,8 @@ int lessThenZero(double value) {
 //! @return 0 if all fine
 //!
 int solveEquation(equationData_t *equationData) {
+    assert(equationData != NULL);
+
     if (isZero(equationData->inputData.a)) {
         // a == 0, equation is linear or doesn't depend on X
         solveLinearEquation(equationData);
@@ -57,6 +61,8 @@ int solveEquation(equationData_t *equationData) {
 //! @return zero if all fine
 //!
 int solveSquareEquation(equationData_t *equationData) {
+    assert(equationData != NULL);
+
     double a = equationData->inputData.a;
     double b = equationData->inputData.b;
     double c = equationData->inputData.c;
@@ -95,6 +101,8 @@ int solveSquareEquation(equationData_t *equationData) {
 //! @return zero if all fine
 //!
 int solveLinearEquation(equationData_t *equationData) {
+    assert(equationData != NULL);
+
     double b = equationData->inputData.b;
     double c = equationData->inputData.c;
 

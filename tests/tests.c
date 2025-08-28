@@ -101,6 +101,12 @@ testResult_t assertDataEquals(const equationData_t expectedSolution, const equat
     return TEST_SUCCESS;
 }
 
+/**
+ * checks given expected solution and edits result in test stats
+ * @param testStats pointer to test stats object
+ * @param expectedData expected values after equation is solved
+ * @return zero if all fine
+ */
 int checkResultAndUpdate(testStats_t *testStats, equationData_t expectedData) {
     testResult_t result = assertSolutionEquals(expectedData);
     switch (result) {
@@ -119,6 +125,11 @@ int checkResultAndUpdate(testStats_t *testStats, equationData_t expectedData) {
     return 0;
 }
 
+/**
+ * uses test data from TEST_DATA_FILE_PATH constant path
+ * @param testStats pointer to test stats object
+ * @return zero if all fine
+ */
 int solveEquationTestWithFileData(testStats_t* testStats) {
     FILE* fileStream = fopen(TEST_DATA_FILE_PATH, "r");
 
@@ -154,7 +165,7 @@ int solveEquationTestWithFileData(testStats_t* testStats) {
         fgets(inputLine, MAX_LINE_LENGTH-1, fileStream);
     }
 
-    return TEST_SUCCESS;
+    return 0;
 }
 
 //---------------------------------------------------

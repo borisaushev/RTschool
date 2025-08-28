@@ -1,4 +1,6 @@
 #include "controller.h"
+
+#include <assert.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -13,11 +15,18 @@
  * @param file buffer to write found file path
  * @param argc main function argc
  * @param argv main function argv
+ * @param fileFlag flag after which the file path is specified
  * @return one if file found, zero otherwise
  */
-int getFilePath(char* file, const int argc, const char** argv) {
+int getFilePath(char* file, const int argc, const char** argv, const char* fileFlag) {
+    assert(file != NULL);
+    assert(argv != NULL);
+    assert(argc >= 0);
+
     for (int i = 1; i < argc - 1; ++i) {
-        if (strcmp(argv[i], FILE_FLAG) == 0) {
+        size_t index = i;
+        assert(index < (sizeof(*argv) / sizeof(argv[0])));
+        if (strcmp(argv[index], fileFlag) == 0) {
             const char* filePath = argv[i+1];
             strcpy(file, filePath);
             return 1;
@@ -34,8 +43,10 @@ int getFilePath(char* file, const int argc, const char** argv) {
  * @return zero if all fine
  */
 int startBorissScript(const int argc, const char **argv) {
+    assert(argv != NULL);
+
     char file[MAX_LINE_LENGTH];
-    if (getFilePath(file, argc, argv)) {
+    if (getFilePath(file, argc, argv, FILE_FLAG)) {
         scriptFromFile(file, argc, argv);
     }
     else {
@@ -53,6 +64,10 @@ int startBorissScript(const int argc, const char **argv) {
  * @return zero if all fine
  */
 int scriptFromFile(char* file, const int argc, const char **argv) {
+    assert(argv != NULL);
+    assert(argc >= 0);
+    assert(file != NULL);
+
     FILE* fs = fopen(file, "r");
     if (fs == NULL) {
         printColored(RED, "Error opening file\n");
@@ -71,6 +86,9 @@ int scriptFromFile(char* file, const int argc, const char **argv) {
  * @return zero if all fine
  */
 int scriptFromConsole(const int argc, const char **argv) {
+    assert(argc >= 0);
+    assert(argv != NULL);
+
     runCommandsUntilStops(stdin, argc, argv);
 
     return 0;
@@ -95,6 +113,10 @@ int greetUser() {
  * @return zero if all fine
  */
 int runCommandsUntilStops(FILE* stream, const int argc, const char **argv) {
+    assert(stream != NULL);
+    assert(argc >= 0);
+    assert(argv != NULL);
+
     greetUser();
 
     command_t currentCommand = SQUARE_SOLVER;
@@ -132,6 +154,8 @@ int runCommandsUntilStops(FILE* stream, const int argc, const char **argv) {
  * @return zero if all fine
  */
 command_t getCommand(FILE* stream) {
+    assert(stream != NULL);
+
     char line[MAX_LINE_LENGTH];
     if (fgets(line, MAX_LINE_LENGTH-1, stream) == NULL) {
         if (feof(stream) || strlen(line) > MAX_LINE_LENGTH) {
@@ -164,6 +188,9 @@ command_t getCommand(FILE* stream) {
  * @return zero if all fine
  */
 int processCommand(command_t command, const int argc, const char **argv) {
+    assert(argc >= 0);
+    assert(argv != NULL);
+
     switch (command) {
         case SQUARE_SOLVER:
             squareSolver(argc, argv);

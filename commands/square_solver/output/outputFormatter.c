@@ -50,6 +50,7 @@ int printSolution(equationData_t equationData) {
 //!
 int printColored(textColor_t textColor, const char format[],  ...) {
     assert(strlen(format) <= MAX_LINE_LENGTH);
+
     printf("%s", getColorPrefix(textColor));
 
     //formatting string
